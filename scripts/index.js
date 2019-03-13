@@ -90,8 +90,12 @@ function update() {
     game.physics.arcade.collide(ball, bricksGroup, ballHitBrick);
     game.physics.arcade.collide(ball, pad, ballHitPad);
 
-    pad.x = game.input.x || game.world.width*0.5; //position du pad en fonction de la position de la souris
-
+    if(LEAP.connected) {
+        pad.x = LEAP.position.x;
+    } else {
+        pad.x = game.input.x || game.world.width*0.5; //position du pad en fonction de la position de la souris
+    }
+    
     timerText.setText('Temps: ' + (timer / 1000).toFixed(1) + 's');
 }
 
